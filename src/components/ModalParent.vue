@@ -2,7 +2,6 @@
   <div class="modal-parent">
     <button @click="showModal">open modal</button>
     <ModalChild v-if="modalFlag" @close="closeModal">
-      <p slot="content">replaced content</p>
     </ModalChild>
   </div>
 </template>
