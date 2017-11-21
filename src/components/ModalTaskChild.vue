@@ -7,13 +7,17 @@
 </template>
 
 <script>
+import VueTypes from 'vue-types'
 import ModalBase from '@/components/ModalBase'
 
 export default {
   name: 'ModalTaskChild',
-  props: [
-    'task'
-  ],
+  props: {
+    task: VueTypes.shape({
+      id: VueTypes.string,
+      active: VueTypes.bool
+    })
+  },
   components: {
     ModalBase
   },
