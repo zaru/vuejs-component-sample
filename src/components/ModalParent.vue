@@ -3,20 +3,31 @@
     <button @click="showModal">open modal</button>
     <ModalChild v-if="modalFlag" @close="closeModal">
     </ModalChild>
+
+    <div v-for="task in tasks">
+      <button @click="showTaskModal(task)">open {{ task.id }} task</button>
+      <ModalTaskChild v-if="task.active" v-bind:task="task" @close="closeTaskModal"></ModalTaskChild>
+    </div>
   </div>
 </template>
 
 <script>
 import ModalChild from '@/components/ModalChild'
+import ModalTaskChild from '@/components/ModalTaskChild'
 
 export default {
   name: 'ModalParent',
   components: {
-    ModalChild
+    ModalChild,
+    ModalTaskChild
   },
   data () {
     return {
-      modalFlag: false
+      modalFlag: false,
+      tasks: [
+        { id: 'a', active: true },
+        { id: 'b', active: false }
+      ]
     }
   },
   methods: {
@@ -25,6 +36,12 @@ export default {
     },
     closeModal: function () {
       this.modalFlag = false
+    },
+    showTaskModal: function (task) {
+      task.active = true
+    },
+    closeTaskModal: function (task) {
+      task.active = false
     }
   }
 }

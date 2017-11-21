@@ -1,6 +1,6 @@
 <template>
   <transition name="fade">
-    <div>
+    <div class="modal">
       <header>
         <slot name="header">
           <h1>default header</h1>
@@ -43,5 +43,10 @@ export default {
 }
 .fade-enter, .fade-leave-to {
   opacity: 0
+}
+.modal {
+  background-color: #eee;
+  border: 1px solid #ddd;
+  padding: 10px;
 }
 </style>
