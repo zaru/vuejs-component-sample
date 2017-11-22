@@ -1,17 +1,17 @@
 <template>
   <div class="post">
     <ul class="action" v-if="activeEditor != post">
-      <li><button @click="switchEditor(post)">edit</button></li>
-      <li><button @click="deletePost(post)">delete</button></li>
+      <li><button @click="switchEditor">edit</button></li>
+      <li><button @click="deletePost">delete</button></li>
     </ul>
     <div v-if="activeEditor == post">
-      <h3><input v-model="post.title"></h3>
-      <p><textarea v-model="post.content"></textarea></p>
-      <p><button @click="updatePost(post)">update</button></p>
+      <h3><input v-model="title"></h3>
+      <p><textarea v-model="content"></textarea></p>
+      <p><button @click="updatePost">update</button></p>
       <p><button @click="updateCancelPost">cancel</button></p>
     </div>
     <div v-else>
-      <h3>{{ post.title }}</h3>
+      <h3>{{ this.post.title }}</h3>
       <p>{{ post.content }}</p>
     </div>
   </div>
@@ -28,21 +28,37 @@ export default {
   },
   data () {
     return {
+      title: '',
+      content: ''
     }
   },
+  mounted: function () {
+    console.log('mounted')
+    console.log(this.post.title)
+    this.resetData()
+  },
   methods: {
-    switchEditor: function (post) {
-      this.$emit('switchEditor', post)
+    resetData: function () {
+      this.title = this.post.title
+      this.content = this.post.content
     },
-    deletePost: function (post) {
-      // do ajax
-      this.$emit('deletePost', post)
+    switchEditor: function () {
+      this.$emit('switchEditor', this.post)
     },
-    updatePost: function (post) {
+    deletePost: function () {
       // do ajax
-      this.$emit('updatePost', post)
+      this.$emit('deletePost', this.post)
+    },
+    updatePost: function () {
+      // do ajax
+      // 本当は ajax で返ってきた JSON を新しい post として扱うが、ここでは手で deep copy
+      var newPost = JSON.parse(JSON.stringify(this.post))
+      newPost.title = this.title
+      newPost.content = this.content
+      this.$emit('updatePost', this.post, newPost)
     },
     updateCancelPost: function () {
+      this.resetData()
       this.$emit('updateCancelPost')
     }
   }

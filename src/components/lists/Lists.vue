@@ -4,17 +4,17 @@
     <p><textarea v-model="newContent"></textarea></p>
     <p><button @click="createPost">create</button></p>
 
-    <div v-for="post in posts">
-      <Post
-        :post="post"
-        :activeEditor="activeEditor"
-        @switchEditor="switchEditor"
-        @deletePost="deletePost"
-        @updatePost="updatePost"
-        @updateCancelPost="updateCancelPost"
+    <Post
+      v-for="post in posts"
+      :post="post"
+      :key="post.id"
+      :activeEditor="activeEditor"
+      @switchEditor="switchEditor"
+      @deletePost="deletePost"
+      @updatePost="updatePost"
+      @updateCancelPost="updateCancelPost"
       >
-      </Post>
-    </div>
+    </Post>
   </div>
 </template>
 
@@ -47,13 +47,16 @@ export default {
   },
   methods: {
     createPost: function () {
-      var post = {
+      // 本来はここで ajax で返ってきたユニークなIDを使いたいがないので手製
+      var newPost = {
         id: this.latestID() + 1,
         title: this.newTitle,
         content: this.newContent
       }
+      console.log('create')
+      console.log(newPost)
       // do ajax
-      this.posts.unshift(post)
+      this.posts.unshift(newPost)
       this.newTitle = ''
       this.newContent = ''
     },
@@ -63,15 +66,15 @@ export default {
     deletePost: function (post) {
       this.posts.splice(this.posts.indexOf(post), 1)
     },
-    updatePost: function (post) {
+    updatePost: function (post, newPost) {
       this.activeEditor = null
-      this.posts.splice(this.posts.indexOf(post), 1, post)
+      this.posts.splice(this.posts.indexOf(post), 1, newPost)
     },
     updateCancelPost: function () {
       this.activeEditor = null
     },
     latestID: function () {
-      Math.max.apply(null, this.posts.map(function (o) { return o.id }))
+      return Math.max.apply(null, this.posts.map(function (o) { return o.id }))
     }
   }
 }
