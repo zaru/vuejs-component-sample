@@ -54,7 +54,6 @@ export default {
         content: this.newContent
       }
       console.log('create')
-      console.log(newPost)
       // do ajax
       this.posts.unshift(newPost)
       this.newTitle = ''
