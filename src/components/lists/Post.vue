@@ -43,7 +43,7 @@ export default {
       this.$emit('updatePost', post)
     },
     updateCancelPost: function () {
-      this.$emit('updateCancelPost', post)
+      this.$emit('updateCancelPost')
     }
   }
 }
