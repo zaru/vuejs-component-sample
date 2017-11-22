@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import ModalSimple from '@/components/ModalSimple'
-import ModalPost from '@/components/ModalPost'
+import ModalSimple from '@/components/modal/ModalSimple'
+import ModalPost from '@/components/modal/ModalPost'
 
 export default {
   name: 'ModalSample',

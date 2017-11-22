@@ -4,7 +4,7 @@ import Router from 'vue-router'
 import Parent from '@/components/Parent'
 import ModalParent from '@/components/ModalParent'
 import DynamicComponent from '@/components/DynamicComponent'
-import ModalSample from '@/components/ModalSample'
+import ModalSample from '@/components/modal/ModalSample'
 
 Vue.use(Router)
 

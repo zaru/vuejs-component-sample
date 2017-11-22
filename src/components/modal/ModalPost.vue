@@ -7,33 +7,31 @@
       @beforeClose="beforeClose"
       @afterClose="afterClose"
     >
-      <p>main content</p>
-
-      <div slot="header">
-        <h3>modal header</h3>
-      </div>
-
-      <div slot="footer">
-        <button @click="close">close</button>
-      </div>
+      <p>title <input v-model="title"></p>
+      <button @click="submit">post</button>
     </modal>
     <button @click="open">open</button>
   </div>
 </template>
 
 <script>
-import Modal from '@/components/Modal'
+import Modal from '@/components/modal/Modal'
+import axios from 'axios'
+
 export default {
-  name: 'ModalSimple',
+  name: 'ModalPost',
   components: {
     Modal
   },
-  data () {
-    return {
-      modalActive: true
+  props: {
+    initTitle: {
+      type: String
     }
   },
-  mounted: function () {
+  data () {
+    return {
+      title: this.initTitle
+    }
   },
   methods: {
     beforeOpen: function (e) {
@@ -53,6 +51,19 @@ export default {
     },
     close: function () {
       this.$refs.modal.close()
+    },
+    submit: function () {
+      axios.post('/', {
+        title: this.title
+      })
+      .then(response => {
+        console.log(response)
+        this.$emit('afterSubmitSuccess')
+      })
+      .catch(error => {
+        console.log(error)
+        this.$emit('afterSubmitError')
+      })
     }
   }
 }
