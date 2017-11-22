@@ -77,6 +77,7 @@ export default {
   margin: 30px auto;
   position: relative;
   background-color: #fff;
+  text-align: left;
 }
 
 header {

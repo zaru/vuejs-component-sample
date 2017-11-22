@@ -1,58 +1,42 @@
 <template>
   <div>
-    <modal
-      ref="modal"
-      @beforeOpen="beforeOpen"
-      @afterOpen="afterOpen"
-      @beforeClose="beforeClose"
-      @afterClose="afterClose"
-    >
-      <p>main content</p>
+    <div>
+      <h3>Simple Modal</h3>
+      <ModalSimple />
+    </div>
 
-      <div slot="header">
-        <h3>modal header</h3>
-      </div>
-
-      <div slot="footer">
-        <button @click="close">close</button>
-      </div>
-    </modal>
-    <button @click="open">open</button>
+    <div>
+      <h3>Form Modal</h3>
+      <ModalPost
+        init-title="foo bar baz"
+        @afterSubmitSuccess="afterSubmitSuccess"
+        @afterSubmitError="afterSubmitError"
+      >
+      </ModalPost>
+    </div>
   </div>
 </template>
 
 <script>
-import Modal from '@/components/Modal'
+import ModalSimple from '@/components/ModalSimple'
+import ModalPost from '@/components/ModalPost'
 
 export default {
   name: 'ModalSample',
   components: {
-    Modal
+    ModalSimple,
+    ModalPost
   },
   data () {
     return {
     }
   },
-  mounted: function () {
-  },
   methods: {
-    beforeOpen: function (e) {
-      console.log('before open')
+    afterSubmitSuccess: function () {
+      console.log('afterSubmitSuccess')
     },
-    afterOpen: function (e) {
-      console.log('after open')
-    },
-    beforeClose: function (e) {
-      console.log('before close')
-    },
-    afterClose: function (e) {
-      console.log('after close')
-    },
-    open: function () {
-      this.$refs.modal.open()
-    },
-    close: function () {
-      this.$refs.modal.close()
+    afterSubmitError: function () {
+      console.log('afterSubmitError')
     }
   }
 }
