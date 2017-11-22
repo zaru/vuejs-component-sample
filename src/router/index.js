@@ -5,6 +5,7 @@ import Parent from '@/components/Parent'
 import ModalParent from '@/components/ModalParent'
 import DynamicComponent from '@/components/DynamicComponent'
 import ModalSample from '@/components/modal/ModalSample'
+import Lists from '@/components/lists/Lists'
 
 Vue.use(Router)
 
@@ -29,6 +30,11 @@ export default new Router({
       path: '/modal_sample',
       name: 'ModalSample',
       component: ModalSample
+    },
+    {
+      path: '/lists',
+      name: 'Lists',
+      component: Lists
     }
   ]
 })
