@@ -1,10 +1,13 @@
 <template>
   <div class="vuex-sample">
     <button @click="inc">+</button>
+    {{ count }}
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'VuexSample',
   components: {
@@ -13,10 +16,12 @@ export default {
     return {
     }
   },
+  computed: mapState({
+    count: state => state.count,
+  }),
   methods: {
     inc: function () {
       this.$store.commit('increment')
-      console.log(this.$store.state.count)
     }
   }
 }
