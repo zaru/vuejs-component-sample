@@ -1,12 +1,15 @@
 <template>
   <div class="vuex-sample">
     <button @click="inc">+</button>
-    {{ count }}
+    <p>{{ count }}</p>
+    <p>{{ myCount }}</p>
+    <p>{{ this.$store.getters.myCount }}</p>
+    <p>{{ this.$store.getters.whoCount('your') }}</p>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   name: 'VuexSample',
@@ -18,6 +21,9 @@ export default {
   },
   computed: mapState({
     count: state => state.count,
+    ...mapGetters([
+      'myCount'
+    ])
   }),
   methods: {
     inc: function () {

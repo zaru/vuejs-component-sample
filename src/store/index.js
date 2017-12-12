@@ -11,5 +11,13 @@ export default new Vuex.Store({
     increment (state) {
       state.count++
     }
+  },
+  getters: {
+    myCount: state => {
+      return `my state is ${state.count}`
+    },
+    whoCount: state => who => {
+      return `${who} state is ${state.count}`
+    }
   }
 })
