@@ -1,5 +1,5 @@
 <template>
-  <ModalBase>
+  <ModalBase v-if="task.active">
     <p slot="header">Task ID = {{ task.id }}</p>
     <p slot="main">task {{ task.id}} is good.</p>
     <button slot="footer" @click="$emit('close', task)">close task</button>

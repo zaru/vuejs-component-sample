@@ -6,7 +6,7 @@
 
     <div v-for="task in tasks">
       <button @click="showTaskModal(task)">open {{ task.id }} task</button>
-      <ModalTaskChild v-if="task.active" v-bind:task="task" @close="closeTaskModal"></ModalTaskChild>
+      <ModalTaskChild :task="task" @close="closeTaskModal"></ModalTaskChild>
     </div>
   </div>
 </template>
